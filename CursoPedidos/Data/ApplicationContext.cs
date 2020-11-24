@@ -6,7 +6,7 @@ namespace PedidosEFCore.Data
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data source=(localdb)\\mssqllocaldb;Initial Catalog=CursoEFCore; Integrated Security=true");
+            optionsBuilder.UseSqlServer("Data source=DESKTOP-H3A4EE5;Initial Catalog=CursoEFCore; Integrated Security=true");
         }
     }
 }
