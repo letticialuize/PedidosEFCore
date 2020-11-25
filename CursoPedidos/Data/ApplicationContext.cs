@@ -14,9 +14,7 @@ namespace PedidosEFCore.Data
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new ClienteConfiguration());
-            modelBuilder.ApplyConfiguration(new PedidoConfiguration());
-            modelBuilder.ApplyConfiguration(new PedidoItemConfiguration());
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationContext).Assembly);
         }
     }
 }
