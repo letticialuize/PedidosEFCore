@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using PedidosEFCore.Data.Configurations;
 using PedidosEFCore.Domain;
 
 namespace PedidosEFCore.Data
@@ -13,28 +14,9 @@ namespace PedidosEFCore.Data
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Cliente>(c =>
-            {
-                c.ToTable("Clientes");
-                c.HasKey(c => c.Id);
-                c.Property(c => c.Nome).HasColumnType("varchar(80)").IsRequired();
-                c.Property(c => c.Telefone).HasColumnType("char(11)");
-                c.Property(c => c.CEP).HasColumnType("char(8)").IsRequired();
-                c.Property(c => c.Estado).HasColumnType("char(2)").IsRequired();
-                c.Property(c => c.Cidade).HasMaxLength(60).IsRequired();
-
-                c.HasIndex(i => i.Telefone).HasName("idx_cliente_telefone");
-            });
-
-            modelBuilder.Entity<Produto>(p => 
-            {
-                p.ToTable("Produtos");
-                p.HasKey(p => p.Id);
-                p.Property(p => p.CodigoBarras).HasColumnType("varchar(14)").IsRequired();
-                p.Property(p => p.Descricao).HasColumnType("varchar(60)");
-                p.Property(p => p.Valor).IsRequired();
-                p.Property(p => p.TipoProduto).HasConversion<string>();
-            });
+            modelBuilder.ApplyConfiguration(new ClienteConfiguration());
+            modelBuilder.ApplyConfiguration(new PedidoConfiguration());
+            modelBuilder.ApplyConfiguration(new PedidoItemConfiguration());
         }
     }
 }
